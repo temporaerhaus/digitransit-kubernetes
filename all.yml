@@ -147,18 +147,20 @@ spec:
     spec:
       containers:
       - name: digitransit-ui
-        image: verschwoerhaus/digitransit-ui:2019-05-16
+        image: verschwoerhaus/digitransit-ui:0c7adc2
         imagePullPolicy: "Always"
         ports:
         - containerPort: 8080
         env:
         - name: CONFIG
           value: ulm
-        - name: LOCATIONIQ_API_KEY
-          valueFrom:
-            secretKeyRef:
-              name: digitransit-ui
-              key: LOCATIONIQ_API_KEY
+        - name: GEOCODING_BASE_URL
+          value: "https://api.digitransit.im.verschwoerhaus.de/geocoding/v1"
+        #- name: LOCATIONIQ_API_KEY
+        #  valueFrom:
+        #    secretKeyRef:
+        #      name: digitransit-ui
+        #      key: LOCATIONIQ_API_KEY
 ---
 apiVersion: apps/v1
 kind: Deployment
