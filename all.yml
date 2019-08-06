@@ -217,6 +217,32 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: photon-pelias-adapter
+  labels:
+    app: photon-pelias-adapter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: photon-pelias-adapter
+  template:
+    metadata:
+      labels:
+        app: photon-pelias-adapter
+    spec:
+      containers:
+      - name: photon-pelias-adapter
+        image: stadtulm/photon-pelias-adapter:latest
+        imagePullPolicy: "Always"
+        ports:
+        - containerPort: 8080
+        env:
+        - name: PHOTON_URL
+          value: https://api.mfdz.de/photon/
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
   name: digitransit-proxy
   labels:
     app: digitransit-proxy
