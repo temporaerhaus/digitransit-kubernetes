@@ -271,7 +271,7 @@ spec:
     spec:
       containers:
       - name: digitransit-proxy
-        image: verschwoerhaus/digitransit-proxy:88963e0
+        image: verschwoerhaus/digitransit-proxy:26c1525
         imagePullPolicy: "Always"
         ports:
         - containerPort: 8080
