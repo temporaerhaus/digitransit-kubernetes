@@ -221,7 +221,7 @@ spec:
     spec:
       containers:
       - name: graphiql
-        image: verschwoerhaus/graphiql:latest
+        image: verschwoerhaus/graphiql:2019-10-30
         imagePullPolicy: "Always"
         ports:
         - containerPort: 8080
