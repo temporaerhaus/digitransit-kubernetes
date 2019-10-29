@@ -160,13 +160,15 @@ spec:
     spec:
       containers:
       - name: digitransit-ui
-        image: verschwoerhaus/digitransit-ui:e527b70
+        image: verschwoerhaus/digitransit-ui:652eddb
         imagePullPolicy: "Always"
         ports:
         - containerPort: 8080
         env:
         - name: CONFIG
-          value: ulm
+          value: vsh
+        - name: OTP_URL
+          value: "https://api.digitransit.im.verschwoerhaus.de/routing/v1/routers/ulm/"
         - name: GEOCODING_BASE_URL
           value: "https://api.digitransit.im.verschwoerhaus.de/geocoding/v1"
         #- name: LOCATIONIQ_API_KEY
@@ -193,7 +195,7 @@ spec:
     spec:
       containers:
       - name: hsl-map-server
-        image: verschwoerhaus/hsl-map-server:latest
+        image: verschwoerhaus/hsl-map-server:b4adf23
         imagePullPolicy: "Always"
         ports:
         - containerPort: 8080
