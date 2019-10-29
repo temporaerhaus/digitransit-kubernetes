@@ -55,7 +55,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: digitransit-ui-ulm
+  name: digitransit-ui-vsh
 spec:
   selector:
     app: digitransit-ui
@@ -81,7 +81,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: opentripplanner-ulm
+  name: opentripplanner-vsh
 spec:
   selector:
     app: opentripplanner
@@ -109,7 +109,7 @@ spec:
     spec:
       containers:
       - name: opentripplanner-data-container-vsh
-        image: verschwoerhaus/opentripplanner-data-container-ulm:2019-10-28-latest
+        image: verschwoerhaus/opentripplanner-data-container-vsh:2019-10-28-latest
         imagePullPolicy: "Always"
         ports:
         - containerPort: 8080
@@ -138,7 +138,7 @@ spec:
         - containerPort: 8080
         env:
         - name: ROUTER_NAME
-          value: ulm
+          value: vsh
         - name: ROUTER_DATA_CONTAINER_URL
           value: http://opentripplanner-data-con-vsh:8080
 ---
@@ -168,7 +168,7 @@ spec:
         - name: CONFIG
           value: vsh
         - name: OTP_URL
-          value: "https://api.digitransit.im.verschwoerhaus.de/routing/v1/routers/ulm/"
+          value: "https://api.digitransit.im.verschwoerhaus.de/routing/v1/routers/vsh/"
         - name: GEOCODING_BASE_URL
           value: "https://api.digitransit.im.verschwoerhaus.de/geocoding/v1"
         #- name: LOCATIONIQ_API_KEY
@@ -201,7 +201,7 @@ spec:
         - containerPort: 8080
         env:
         - name: OTP_URL
-          value: opentripplanner-ulm:8080/otp/routers/ulm/index/graphql
+          value: opentripplanner-vsh:8080/otp/routers/vsh/index/graphql
 ---
 apiVersion: apps/v1
 kind: Deployment
