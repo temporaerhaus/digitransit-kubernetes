@@ -1,0 +1,85 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: digitransit
+spec:
+  rules:
+  - host: digitransit.im.verschwoerhaus.de
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: digitransit-ui-vsh
+          servicePort: 8080
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: digitransit-api
+spec:
+  rules:
+  - host: api.digitransit.im.verschwoerhaus.de
+    http:
+      paths:
+      - path: /map/v1
+        backend:
+          serviceName: hsl-map-server
+          servicePort: 8080
+      - path: /graphiql
+        backend:
+          serviceName: graphiql
+          servicePort: 8080
+
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: digitransit-api-geocoding
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /v1
+spec:
+  rules:
+  - host: api.digitransit.im.verschwoerhaus.de
+    http:
+      paths:
+      - path: /geocoding/v1
+        backend:
+          serviceName: photon-pelias-adapter
+          servicePort: 8080
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: digitransit-api-routing
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /otp
+spec:
+  rules:
+  - host: api.digitransit.im.verschwoerhaus.de
+    http:
+      paths:
+      - path: /routing/v1
+        backend:
+          serviceName: opentripplanner-vsh
+          servicePort: 8080
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: digitransit-api-data
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-methods: "GET, POST, OPTIONS"
+    nginx.ingress.kubernetes.io/cors-allow-headers: "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "*"
+spec:
+  rules:
+  - host: api.digitransit.im.verschwoerhaus.de
+    http:
+      paths:
+      - path: /routing-data/v2/vsh
+        backend:
+          serviceName: opentripplanner-data-con-vsh
+          servicePort: 8080
