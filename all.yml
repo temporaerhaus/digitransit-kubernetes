@@ -12,7 +12,7 @@ spec:
     port: 8080
     targetPort: 8080
   externalIPs:
-  - 192.168.10.8
+  - 192.168.10.170
 ---
 apiVersion: v1
 kind: Service
