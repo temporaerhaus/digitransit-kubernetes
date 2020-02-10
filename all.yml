@@ -172,6 +172,8 @@ spec:
           value: "https://api.digitransit.im.verschwoerhaus.de/routing/v1/routers/vsh/"
         - name: GEOCODING_BASE_URL
           value: "https://api.digitransit.im.verschwoerhaus.de/geocoding/v1"
+        - name: MAP_URL
+          value: "https://maps.wikimedia.org/osm-intl/"
         #- name: LOCATIONIQ_API_KEY
         #  valueFrom:
         #    secretKeyRef:
