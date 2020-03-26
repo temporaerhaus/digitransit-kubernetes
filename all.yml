@@ -133,7 +133,7 @@ spec:
     spec:
       containers:
       - name: opentripplanner
-        image: hsldevcom/opentripplanner:da7ca2a4d5a8cb381cd64efc6df5ba4252d45440
+        image: hsldevcom/opentripplanner:4dd0be3f2a9a3adce0c4d6a05427b42a97da48ae
         imagePullPolicy: "Always"
         ports:
         - containerPort: 8080
