@@ -142,6 +142,8 @@ spec:
           value: vsh
         - name: ROUTER_DATA_CONTAINER_URL
           value: http://opentripplanner-data-con-vsh:8080
+        - name: JAVA_OPTS
+          value: "-Xms10G -Xmx10G"
 ---
 apiVersion: apps/v1
 kind: Deployment
