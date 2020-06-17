@@ -163,7 +163,7 @@ spec:
     spec:
       containers:
       - name: digitransit-ui
-        image: verschwoerhaus/digitransit-ui:b54dd58
+        image: verschwoerhaus/digitransit-ui:930d4df
         imagePullPolicy: "Always"
         ports:
         - containerPort: 8080
@@ -258,7 +258,8 @@ spec:
         - containerPort: 8080
         env:
         - name: PHOTON_URL
-          value: https://api.mfdz.de/photon/
+          # value: https://api.mfdz.de/photon/
+          value: https://photon.stadtnavi.eu/
 ---
 apiVersion: apps/v1
 kind: Deployment
