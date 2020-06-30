@@ -110,7 +110,7 @@ spec:
     spec:
       containers:
       - name: opentripplanner-data-container-vsh
-        image: verschwoerhaus/opentripplanner-data-container-vsh:2020-06-22-latest
+        image: verschwoerhaus/opentripplanner-data-container-vsh:d725b4d
         imagePullPolicy: "Always"
         ports:
         - containerPort: 8080
@@ -133,7 +133,7 @@ spec:
     spec:
       containers:
       - name: opentripplanner
-        image: mfdz/opentripplanner:7de972244cf1bb4322573c4dea083675f660efcc
+        image: mfdz/opentripplanner:6bf6f906b8293a0d22bdbe487f06e5d01cfad614
         imagePullPolicy: "Always"
         ports:
         - containerPort: 8080
