@@ -110,7 +110,8 @@ spec:
     spec:
       containers:
       - name: opentripplanner-data-container-vsh
-        image: verschwoerhaus/opentripplanner-data-container-vsh:d725b4d
+#        image: verschwoerhaus/opentripplanner-data-container-vsh:d725b4d
+        image: verschwoerhaus/digitransit-otp-data-float:latest
         imagePullPolicy: "Always"
         ports:
         - containerPort: 8080
@@ -133,7 +134,8 @@ spec:
     spec:
       containers:
       - name: opentripplanner
-        image: mfdz/opentripplanner:6bf6f906b8293a0d22bdbe487f06e5d01cfad614
+        # image: mfdz/opentripplanner:6bf6f906b8293a0d22bdbe487f06e5d01cfad614
+        image: lehrenfried/opentripplanner:latest
         imagePullPolicy: "Always"
         ports:
         - containerPort: 8080
@@ -258,7 +260,6 @@ spec:
         - containerPort: 8080
         env:
         - name: PHOTON_URL
-          # value: https://api.mfdz.de/photon/
           value: https://photon.stadtnavi.eu/
 ---
 apiVersion: apps/v1
