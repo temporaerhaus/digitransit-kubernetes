@@ -110,8 +110,7 @@ spec:
     spec:
       containers:
       - name: opentripplanner-data-container-vsh
-#        image: verschwoerhaus/opentripplanner-data-container-vsh:d725b4d
-        image: verschwoerhaus/digitransit-otp-data-float:latest
+        image: verschwoerhaus/opentripplanner-data-container-vsh:2020-07-17-daca0e8
         imagePullPolicy: "Always"
         ports:
         - containerPort: 80
@@ -134,8 +133,8 @@ spec:
     spec:
       containers:
       - name: opentripplanner
-        # image: mfdz/opentripplanner:6bf6f906b8293a0d22bdbe487f06e5d01cfad614
-        image: lehrenfried/opentripplanner:latest
+        image: mfdz/opentripplanner:3185a672c9030cc0d16c1b846ae9c9cc28cd08bf
+        #image: lehrenfried/opentripplanner:latest
         imagePullPolicy: "Always"
         ports:
         - containerPort: 8080
