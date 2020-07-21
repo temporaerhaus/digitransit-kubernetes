@@ -56,7 +56,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: digitransit-ui-vsh
+  name: digitransit-ui
 spec:
   selector:
     app: digitransit-ui
@@ -69,10 +69,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: opentripplanner-data-con-vsh
+  name: opentripplanner-data-container
 spec:
   selector:
-    app: opentripplanner-data-container-vsh
+    app: opentripplanner-data-container
   ports:
   - name: http
     protocol: TCP
@@ -82,7 +82,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: opentripplanner-vsh
+  name: opentripplanner
 spec:
   selector:
     app: opentripplanner
@@ -95,25 +95,31 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: opentripplanner-data-container-vsh
+  name: opentripplanner-data-container
   labels:
-    app: opentripplanner-data-container-vsh
+    app: opentripplanner-data-container
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: opentripplanner-data-container-vsh
+      app: opentripplanner-data-container
   template:
     metadata:
       labels:
-        app: opentripplanner-data-container-vsh
+        app: opentripplanner-data-container
     spec:
       containers:
-      - name: opentripplanner-data-container-vsh
+      - name: opentripplanner-data-container
         image: verschwoerhaus/opentripplanner-data-container-vsh:2020-07-20-8c15ab7
         imagePullPolicy: "Always"
         ports:
         - containerPort: 80
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 3
+          periodSeconds: 3
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -134,7 +140,6 @@ spec:
       containers:
       - name: opentripplanner
         image: mfdz/opentripplanner:d122e34e23833d2598c65dbdfa92c7310e74ac28
-        #image: lehrenfried/opentripplanner:latest
         imagePullPolicy: "Always"
         ports:
         - containerPort: 8080
@@ -142,7 +147,7 @@ spec:
         - name: ROUTER_NAME
           value: vsh
         - name: ROUTER_DATA_CONTAINER_URL
-          value: http://opentripplanner-data-con-vsh
+          value: http://opentripplanner-data-container
         - name: JAVA_OPTS
           value: "-Xms10G -Xmx10G"
 ---
@@ -177,11 +182,6 @@ spec:
           value: "https://api.digitransit.im.verschwoerhaus.de/geocoding/v1"
         - name: MAP_URL
           value: "https://osm-demo-{s}.wheregroup.com/tiles/1.0.0/osm/webmercator/"
-        #- name: LOCATIONIQ_API_KEY
-        #  valueFrom:
-        #    secretKeyRef:
-        #      name: digitransit-ui
-        #      key: LOCATIONIQ_API_KEY
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -207,7 +207,7 @@ spec:
         - containerPort: 8080
         env:
         - name: OTP_URL
-          value: opentripplanner-vsh:8080/otp/routers/vsh/index/graphql
+          value: opentripplanner:8080/otp/routers/vsh/index/graphql
 ---
 apiVersion: apps/v1
 kind: Deployment
