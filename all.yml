@@ -110,7 +110,7 @@ spec:
     spec:
       containers:
       - name: opentripplanner-data-container
-        image: verschwoerhaus/opentripplanner-data-container-vsh:2020-07-23-af84de4
+        image: verschwoerhaus/opentripplanner-data-container-vsh:2020-07-23-18bb384
         imagePullPolicy: "Always"
         ports:
         - containerPort: 80
@@ -169,7 +169,7 @@ spec:
     spec:
       containers:
       - name: digitransit-ui
-        image: verschwoerhaus/digitransit-ui:e520df8
+        image: verschwoerhaus/digitransit-ui:5026843
         imagePullPolicy: "Always"
         ports:
         - containerPort: 8080
