@@ -201,7 +201,7 @@ spec:
     spec:
       containers:
       - name: hsl-map-server
-        image: verschwoerhaus/hsl-map-server:6b38ccf
+        image: verschwoerhaus/hsl-map-server:4c81915
         imagePullPolicy: "Always"
         ports:
         - containerPort: 8080
