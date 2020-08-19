@@ -201,13 +201,15 @@ spec:
     spec:
       containers:
       - name: hsl-map-server
-        image: verschwoerhaus/hsl-map-server:4c81915
+        image: verschwoerhaus/hsl-map-server:6342c88
         imagePullPolicy: "Always"
         ports:
         - containerPort: 8080
         env:
         - name: OTP_URL
           value: opentripplanner:8080/otp/routers/vsh/index/graphql
+        - name: PARK_API_URL
+          value: https://api.parkendd.de/Ulm
 ---
 apiVersion: apps/v1
 kind: Deployment
