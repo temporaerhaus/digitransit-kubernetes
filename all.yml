@@ -169,7 +169,7 @@ spec:
     spec:
       containers:
       - name: digitransit-ui
-        image: verschwoerhaus/digitransit-ui:5026843
+        image: verschwoerhaus/digitransit-ui:dpl-824051f
         imagePullPolicy: "Always"
         ports:
         - containerPort: 8080
