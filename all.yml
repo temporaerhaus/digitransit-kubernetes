@@ -139,7 +139,7 @@ spec:
     spec:
       containers:
       - name: opentripplanner
-        image: mfdz/opentripplanner:eae424fff84235a6e97007683ecbc1c6ef0f4b40
+        image: mfdz/opentripplanner:1481b1eb089ea3a3b40a8d098ab263b0ff959968
         imagePullPolicy: "Always"
         ports:
         - containerPort: 8080
