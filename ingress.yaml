@@ -10,7 +10,7 @@ spec:
       paths:
       - path: /
         backend:
-          serviceName: digitransit-ui-vsh
+          serviceName: digitransit-ui
           servicePort: 8080
 ---
 apiVersion: extensions/v1beta1
@@ -53,15 +53,20 @@ kind: Ingress
 metadata:
   name: digitransit-api-routing
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /otp
+    nginx.ingress.kubernetes.io/rewrite-target: /otp/$2
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-methods: "GET, POST, OPTIONS"
+    nginx.ingress.kubernetes.io/cors-allow-headers: "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,OTPTimeout,id"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "*"
+    nginx.ingress.kubernetes.io/cors-max-age: "7200"
 spec:
   rules:
   - host: api.digitransit.im.verschwoerhaus.de
     http:
       paths:
-      - path: /routing/v1
+      - path: /routing/v1(/|$)(.*)
         backend:
-          serviceName: opentripplanner-vsh
+          serviceName: opentripplanner
           servicePort: 8080
 ---
 apiVersion: extensions/v1beta1
@@ -72,8 +77,9 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
     nginx.ingress.kubernetes.io/enable-cors: "true"
     nginx.ingress.kubernetes.io/cors-allow-methods: "GET, POST, OPTIONS"
-    nginx.ingress.kubernetes.io/cors-allow-headers: "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range"
+    nginx.ingress.kubernetes.io/cors-allow-headers: "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type"
     nginx.ingress.kubernetes.io/cors-allow-origin: "*"
+    nginx.ingress.kubernetes.io/cors-max-age: "7200"
 spec:
   rules:
   - host: api.digitransit.im.verschwoerhaus.de
@@ -81,5 +87,5 @@ spec:
       paths:
       - path: /routing-data/v2/vsh
         backend:
-          serviceName: opentripplanner-data-con-vsh
+          serviceName: opentripplanner-data-container
           servicePort: 8080
