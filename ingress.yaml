@@ -37,13 +37,13 @@ kind: Ingress
 metadata:
   name: digitransit-api-geocoding
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /v1
+    nginx.ingress.kubernetes.io/rewrite-target: /v1/$2
 spec:
   rules:
   - host: api.digitransit.im.verschwoerhaus.de
     http:
       paths:
-      - path: /geocoding/v1
+      - path: /geocoding/v1(/|$)(.*)
         backend:
           serviceName: photon-pelias-adapter
           servicePort: 8080
