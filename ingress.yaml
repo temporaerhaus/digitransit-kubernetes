@@ -17,6 +17,10 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: digitransit-api
+  annotations:
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "*"
+    nginx.ingress.kubernetes.io/cors-max-age: "7200"
 spec:
   rules:
   - host: api.digitransit.im.verschwoerhaus.de
@@ -29,6 +33,10 @@ spec:
       - path: /graphiql
         backend:
           serviceName: graphiql
+          servicePort: 8080
+      - path: /swu-ladesaeulen/v1
+        backend:
+          serviceName: swu-ladesaeulen
           servicePort: 8080
 
 ---

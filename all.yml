@@ -40,6 +40,19 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  name: swu-ladesaeulen
+spec:
+  selector:
+    app: swu-ladesaeulen
+  ports:
+  - name: http
+    protocol: TCP
+    port: 8080
+    targetPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
   name: digitransit-ui
 spec:
   selector:
@@ -246,4 +259,26 @@ spec:
         env:
         - name: PHOTON_URL
           value: https://photon.stadtnavi.eu/
-
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: swu-ladesaeulen
+  labels:
+    app: swu-ladesaeulen
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: swu-ladesaeulen
+  template:
+    metadata:
+      labels:
+        app: swu-ladesaeulen
+    spec:
+      containers:
+      - name: swu-ladesaeulen
+        image: stadtulm/swu-ladesaeulen:latest
+        imagePullPolicy: "Always"
+        ports:
+        - containerPort: 8080
