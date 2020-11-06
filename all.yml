@@ -53,6 +53,19 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  name: zeus-gbfs
+spec:
+  selector:
+    app: zeus-gbfs
+  ports:
+  - name: http
+    protocol: TCP
+    port: 80
+    targetPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
   name: digitransit-ui
 spec:
   selector:
@@ -282,3 +295,38 @@ spec:
         imagePullPolicy: "Always"
         ports:
         - containerPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zeus-gbfs
+  labels:
+    app: zeus-gbfs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zeus-gbfs
+  template:
+    metadata:
+      labels:
+        app: zeus-gbfs
+    spec:
+      containers:
+      - name: zeus-gbfs
+        image: stadtulm/wunderfleet-gbfs-opener:4230686
+        imagePullPolicy: "Always"
+        ports:
+        - containerPort: 80
+        env:
+        - name: WUNDER_BACKEND_HOST
+          valueFrom:
+            secretKeyRef:
+              name: wunderfleet-gbfs-opener-zeus
+              key: WUNDER_BACKEND_HOST
+        - name: WUNDER_API_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: wunderfleet-gbfs-opener-zeus
+              key: WUNDER_API_TOKEN
+

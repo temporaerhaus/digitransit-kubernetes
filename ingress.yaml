@@ -42,6 +42,26 @@ spec:
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
+  name: digitransit-api-gbfs
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "*"
+    nginx.ingress.kubernetes.io/cors-max-age: "7200"
+    nginx.ingress.kubernetes.io/x-forwarded-prefix: "/zeus-gbfs"
+spec:
+  rules:
+  - host: api.digitransit.im.verschwoerhaus.de
+    http:
+      paths:
+      - path: /zeus-gbfs(/|$)(.*)
+        backend:
+          serviceName: zeus-gbfs
+          servicePort: 80
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
   name: digitransit-api-geocoding
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /v1/$2
