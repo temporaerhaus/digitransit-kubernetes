@@ -75,24 +75,3 @@ spec:
         backend:
           serviceName: opentripplanner
           servicePort: 8080
----
-apiVersion: networking.k8s.io/v1beta1
-kind: Ingress
-metadata:
-  name: digitransit-api-data
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
-    nginx.ingress.kubernetes.io/enable-cors: "true"
-    nginx.ingress.kubernetes.io/cors-allow-methods: "GET, POST, OPTIONS"
-    nginx.ingress.kubernetes.io/cors-allow-headers: "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type"
-    nginx.ingress.kubernetes.io/cors-allow-origin: "*"
-    nginx.ingress.kubernetes.io/cors-max-age: "7200"
-spec:
-  rules:
-  - host: api.digitransit.im.verschwoerhaus.de
-    http:
-      paths:
-      - path: /routing-data/v2/vsh
-        backend:
-          serviceName: opentripplanner-data-container
-          servicePort: 8080
