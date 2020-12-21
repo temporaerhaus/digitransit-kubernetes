@@ -314,11 +314,13 @@ spec:
     spec:
       containers:
       - name: zeus-gbfs
-        image: stadtulm/wunderfleet-gbfs-opener:4230686
+        image: stadtulm/wunderfleet-gbfs-opener:002f7c1
         imagePullPolicy: "Always"
         ports:
         - containerPort: 80
         env:
+        - name: DNS_RESOLVER
+          value: kube-dns.kube-system.svc.cluster.local
         - name: WUNDER_BACKEND_HOST
           valueFrom:
             secretKeyRef:
