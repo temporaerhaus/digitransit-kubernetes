@@ -4,6 +4,11 @@ kind: Ingress
 metadata:
   name: digitransit
 spec:
+  tls:
+    - hosts:
+      - digitransit.im.verschwoerhaus.de
+      - api.digitransit.im.verschwoerhaus.de
+      secretName: tls-digitransitimverschwoerhausde
   rules:
   - host: digitransit.im.verschwoerhaus.de
     http:
@@ -25,6 +30,11 @@ metadata:
     nginx.ingress.kubernetes.io/cors-allow-origin: "*"
     nginx.ingress.kubernetes.io/cors-max-age: "7200"
 spec:
+  tls:
+    - hosts:
+      - digitransit.im.verschwoerhaus.de
+      - api.digitransit.im.verschwoerhaus.de
+      secretName: tls-digitransitimverschwoerhausde
   rules:
   - host: api.digitransit.im.verschwoerhaus.de
     http:
@@ -58,6 +68,11 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /v1/$2
 spec:
+  tls:
+    - hosts:
+      - digitransit.im.verschwoerhaus.de
+      - api.digitransit.im.verschwoerhaus.de
+      secretName: tls-digitransitimverschwoerhausde
   rules:
   - host: api.digitransit.im.verschwoerhaus.de
     http:
@@ -82,6 +97,11 @@ metadata:
     nginx.ingress.kubernetes.io/cors-allow-origin: "*"
     nginx.ingress.kubernetes.io/cors-max-age: "7200"
 spec:
+  tls:
+    - hosts:
+      - digitransit.im.verschwoerhaus.de
+      - api.digitransit.im.verschwoerhaus.de
+      secretName: tls-digitransitimverschwoerhausde
   rules:
   - host: api.digitransit.im.verschwoerhaus.de
     http:

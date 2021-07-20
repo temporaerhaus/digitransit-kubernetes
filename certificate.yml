@@ -1,0 +1,16 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: digitransit-im-verschwoerhaus-de
+  namespace: default
+spec:
+  commonName: digitransit.im.verschwoerhaus.de
+  duration: 2160h # 90d
+  renewBefore: 672h # 28d
+  dnsNames:
+  - digitransit.im.verschwoerhaus.de
+  - api.digitransit.im.verschwoerhaus.de
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt-production
+  secretName: tls-digitransitimverschwoerhausde
