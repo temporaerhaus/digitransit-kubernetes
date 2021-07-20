@@ -1,5 +1,5 @@
 ---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: digitransit
@@ -9,11 +9,14 @@ spec:
     http:
       paths:
       - path: /
+        pathType: Prefix
         backend:
-          serviceName: digitransit-ui
-          servicePort: 8080
+          service:
+            name: digitransit-ui
+            port: 
+              number: 8080
 ---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: digitransit-api
@@ -27,39 +30,28 @@ spec:
     http:
       paths:
       - path: /map/v1
+        pathType: Prefix
         backend:
-          serviceName: hsl-map-server
-          servicePort: 8080
+          service:
+            name: hsl-map-server
+            port: 
+              number: 8080
       - path: /graphiql
+        pathType: Prefix
         backend:
-          serviceName: graphiql
-          servicePort: 8080
-      - path: /swu-ladesaeulen/v1
+          service:
+            name: graphiql
+            port: 
+              number: 8080
+      - path: /swu-ladesaeulen/v1/
+        pathType: Prefix
         backend:
-          serviceName: swu-ladesaeulen
-          servicePort: 8080
+          service:
+            name: swu-ladesaeulen
+            port: 
+              number: 8080
 ---
-apiVersion: networking.k8s.io/v1beta1
-kind: Ingress
-metadata:
-  name: digitransit-api-gbfs
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
-    nginx.ingress.kubernetes.io/enable-cors: "true"
-    nginx.ingress.kubernetes.io/cors-allow-origin: "*"
-    nginx.ingress.kubernetes.io/cors-max-age: "7200"
-    nginx.ingress.kubernetes.io/x-forwarded-prefix: "/zeus-gbfs"
-spec:
-  rules:
-  - host: api.digitransit.im.verschwoerhaus.de
-    http:
-      paths:
-      - path: /zeus-gbfs(/|$)(.*)
-        backend:
-          serviceName: zeus-gbfs
-          servicePort: 80
----
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: digitransit-api-geocoding
@@ -71,11 +63,14 @@ spec:
     http:
       paths:
       - path: /geocoding/v1(/|$)(.*)
+        pathType: Prefix
         backend:
-          serviceName: photon-pelias-adapter
-          servicePort: 8080
+          service:
+            name: photon-pelias-adapter
+            port: 
+              number: 8080
 ---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: digitransit-api-routing
@@ -92,6 +87,9 @@ spec:
     http:
       paths:
       - path: /routing/v1(/|$)(.*)
+        pathType: Prefix
         backend:
-          serviceName: opentripplanner
-          servicePort: 8080
+          service:
+            name: opentripplanner
+            port: 
+              number: 8080
